@@ -4,7 +4,6 @@ import os
 import time
 import random
 import redis
-import sys
 
 PUBLISH_RATE = int(os.getenv("PUB_RATE_PER_SECOND", 20))
 REDIS_HOST = os.getenv("REDIS_HOST", 'localhost')
