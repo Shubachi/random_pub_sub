@@ -28,8 +28,11 @@ def subscriber():
         if new_message.get("type") != "message":
             continue
         
-        with g_mutex:        
-            g_current_values.append(int(new_message.get("data")))
+        with g_mutex:   
+            try:
+                g_current_values.append(int(new_message.get("data")))
+            except ValueError:
+                print("{} cannot be converted to an int".format(new_message.get("data")))
    
 
 def output_and_reset():

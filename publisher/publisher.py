@@ -12,8 +12,8 @@ REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
 REDIS_DB = int(os.getenv("REDIS_DB", 0))
 SUBSCRIPTION_NAME = os.getenv("SUBCRIPTION_NAME", 'pub_sub_test')
 
-# python does not define a max integer value, but we'll define it as max of uint here
-UINT_MAX = 4294967295
+# python does not define a max integer value, but we'll define it as max of int here
+INT_MAX = 2137483647
 
 def publish_random_int(publish_period, subscription_name):
     redis_connection = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
@@ -28,7 +28,7 @@ def publish_random_int(publish_period, subscription_name):
             continue
         
         next_time = current_tick + publish_period
-        current_value = random.randint(0, UINT_MAX)
+        current_value = random.randint(-INT_MAX, INT_MAX)
         redis_connection.publish(subscription_name, current_value)           
 
 
